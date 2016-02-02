@@ -3,6 +3,6 @@
 
 ## Floating Population Analyzer
 
-> To analyze floating population based on bus passengers data 
+> Analyzing floating population based on bus passengers data 
 
 
