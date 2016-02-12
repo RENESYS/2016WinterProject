@@ -6,3 +6,9 @@
 > Analyzing floating population based on bus passengers data 
 
 
+## Issues 1 - cleared
+
+> Seoul open data center's bus stop data doesn't provide GPS data
+> TOPIS provides bus stop infomation with GPS data(need to analyze network packet data)
+> Extract GPS data by using URLConnection Class & json-parser
+
