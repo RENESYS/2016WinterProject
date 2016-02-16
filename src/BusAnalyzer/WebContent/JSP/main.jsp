@@ -4,7 +4,6 @@
 <%
 	DBContact db = new DBContact();
 	Connection con = db.getConnection();
-	//String str = db.func();
 	db.chooseDB("use sample");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,12 +19,13 @@
 	<script type="text/javascript"
 		src="//apis.daum.net/maps/maps3.js?apikey=2afaac55291764d588161ae97c7844e3"></script>
 	<script>
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	//create Map
+		var mapContainer = document.getElementById('map'), 
 		mapOption = {
-			center : new daum.maps.LatLng(37.56564, 126.977021), // 지도의 중심좌표
+			center : new daum.maps.LatLng(37.56564, 126.977021),
 			level : 7
 		};
-		var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		var map = new daum.maps.Map(mapContainer, mapOption);
 	</script>
 
 	<%
@@ -51,24 +51,22 @@
 				imgsrc="http://localhost:8080/BusAnalyzer2/img/green.png";
 			%>
 			<script>
-				var imageSrc = '<%=imgsrc%>', // 마커이미지의 주소입니다    
-				imageSize = new daum.maps.Size(16, 16), // 마커이미지의 크기입니다
+			//set image
+				var imageSrc = '<%=imgsrc%>',    
+				imageSize = new daum.maps.Size(16, 16),
 				imageOption = {
 					offset : new daum.maps.Point(8, 8)
-				}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-		
-				// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+				};
+				//set location and attach on the map
 				var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize,
-						imageOption), markerPosition = new daum.maps.LatLng(<%=y%>,<%=x%>); // 마커가 표시될 위치입니다
+						imageOption), markerPosition = new daum.maps.LatLng(<%=y%>,<%=x%>);
 		
-				// 마커를 생성합니다
 				var marker = new daum.maps.Marker({
 					title : '<%=stop%>',
 					position : markerPosition,
 					image : markerImage
 				});
 		
-				// 마커가 지도 위에 표시되도록 설정합니다
 				marker.setMap(map);
 			</script>
 			<%

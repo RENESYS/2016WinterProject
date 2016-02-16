@@ -23,14 +23,14 @@ public class DBContact {
 			con = DriverManager.getConnection(url, uId, uPwd);
 
 			if (con != null) {
-				System.out.println("데이터 베이스 접속 성공");
+				System.out.println("DB connected");
 			}
 
 		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로드 실패");
+			System.out.println("Driver loading error");
 			System.out.println(e.getMessage());
 		} catch (SQLException e) {
-			System.out.println("데이터 베이스 접속 실패");
+			System.out.println("DB connection fail");
 			System.out.println(e.getMessage());
 		}
 	}
@@ -44,7 +44,7 @@ public class DBContact {
 		pstmt = con.prepareStatement(query);
 		rs = pstmt.executeQuery();
 		}catch(SQLException e){
-			System.out.println("쿼리 수행 실패");
+			System.out.println("Query execution fail");
 			System.out.println(e.getMessage());
 		}
 	}
@@ -55,14 +55,10 @@ public class DBContact {
 			rs = pstmt.executeQuery();
 			rs.next();
 		} catch (SQLException e) {
-			System.out.println("쿼리 수행 실패");
+			System.out.println("Query execution fail");
 			System.out.println(e.getMessage());
 		}
 		return rs;
-	}
-
-	public String func() {
-		return "안녕";
 	}
 
 }
