@@ -32,7 +32,7 @@ public class LocationParse {
 			DBManager man = new DBManager();
 			man.chooseDB("use sample");
 			
-			//버스노선 ID를 읽어들여 사이트에 요청메세지 전송
+			//read bus route ID & send request message to TOPIS
 			while( (ID = bus.readLine()) != null){
 			    String data = URLEncoder.encode("busRouteId", "UTF-8") + "=" + URLEncoder.encode(ID, "UTF-8");
 	
@@ -48,7 +48,7 @@ public class LocationParse {
 			    
 			    String line;
 			    while ((line = rd.readLine()) != null) {
-			    	//응답 JSON메세지에서 resultList 파싱
+			    	//parse resultList from response JSON file
 			    	parser = new JSONParser();
 			    	jo = (JSONObject)(parser.parse(line));
 			    	jarr = (JSONArray)jo.get("resultList");
@@ -58,7 +58,7 @@ public class LocationParse {
 			    	JSONObject resObj;
 		    		String stopID, gpsX, gpsY, stopName, route;
 
-		    		//List의 각Object에서 좌표 정보 추출, DB에 삽입
+		    		//extract location data from each objects of every list & insert into DB
 			    	for(int i = 0; i < size; i++){
 			    		resObj = (JSONObject)jarr.get(i);
 			    		stopID = (String)resObj.get("stationNo");

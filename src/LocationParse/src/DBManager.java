@@ -32,6 +32,7 @@ public class DBManager {
 		}
 	}
 	
+	//selectDB when access
 	public void chooseDB(String query){
 		try{
 		pstmt = con.prepareStatement(query);
@@ -41,18 +42,17 @@ public class DBManager {
 			System.out.println(e.getMessage());
 		}
 	}
-
+	
+	//insert location data in DB
 	public void insertLocation(String gpsX, String gpsY, String ID) {
 		if(ID.length() == 5 && ID.charAt(0) == '0'){
 			ID = ID.substring(1, 5);
 		}
 		else if(ID.charAt(0) == '0')
 			return;
-		
-		//이미 DB에 들어간 정보인지를 확인
+		//check data whether it is duplicated
 		String sql = "select gpsX from bus where StopID= '" + ID + "';";
 		try {
-			//System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			rs.next();
@@ -66,8 +66,7 @@ public class DBManager {
 			System.out.println(e.getMessage());
 			return;
 		}
-		
-		//경위도 좌표 삽입
+		//insert longitude & latitude data
 		sql = "update bus set gpsX = " + gpsX + ", gpsY = " + gpsY + " where StopID = '" + ID + "';";
 		System.out.println(sql);
 		try {
