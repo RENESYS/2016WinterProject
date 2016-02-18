@@ -17,6 +17,7 @@ public class DBContact {
 	PreparedStatement pstmt;
 	ResultSet rs;
 
+	//DB control class construction
 	public DBContact() {
 		try {
 			Class.forName(driver);
@@ -39,6 +40,7 @@ public class DBContact {
 		return con;
 	}
 
+	//selectDB when access
 	public void chooseDB(String query){
 		try{
 		pstmt = con.prepareStatement(query);
@@ -48,12 +50,24 @@ public class DBContact {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	//make SQL query from user's input
+	public String makeSQLquery(String hour, String mon, String type){
+		String ride = "Ride" + hour;
+		String alight = "Alight" + hour;
+		String sel = type + hour;
+		String sql = "select StopName, sum(" + ride + "), sum(" + alight + "), gpsX, gpsY from bus where UseMon=" 
+				+ mon + " group by StopName order by sum( " + sel + ") desc";
+		return sql;
+	}
 
-	public ResultSet select(String sql) {
+	//execute query and return result list
+	public ResultSet selectStopInfo(String hour, String mon, String type) {
+		String sql = makeSQLquery(hour, mon, type);
 		try {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			rs.next();
+			//rs.next();
 		} catch (SQLException e) {
 			System.out.println("Query execution fail");
 			System.out.println(e.getMessage());
