@@ -52,7 +52,7 @@ public class DBContact {
 	}
 	
 	//make SQL query from user's input
-	public String makeSQLquery(String hour, String mon, String type){
+	public String makeStopSQLquery(String hour, String mon, String type){
 		String ride = "Ride" + hour;
 		String alight = "Alight" + hour;
 		String sel = type + hour;
@@ -60,10 +60,19 @@ public class DBContact {
 				+ mon + " group by StopName order by sum( " + sel + ") desc";
 		return sql;
 	}
+	
+	//make SQL query from user's input
+		public String makeRouteSQLquery(String hour, String mon, String routeNo, String stopID){
+			String ride = "Ride" + hour;
+			String alight = "Alight" + hour;
+			String sql = "select StopName, " + ride + ", " + alight + ", GpsX, GpsY from bus where RouteNo=" + routeNo
+					+ " and StopID=" + stopID + " and UseMon=" + mon;
+			return sql;
+		}
 
-	//execute query and return result list
+	//execute query and return bus stops result list
 	public ResultSet selectStopInfo(String hour, String mon, String type) {
-		String sql = makeSQLquery(hour, mon, type);
+		String sql = makeStopSQLquery(hour, mon, type);
 		try {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -75,4 +84,17 @@ public class DBContact {
 		return rs;
 	}
 
+	
+	public ResultSet selectRouteInfo(String hour, String mon, String routeNo, String stopID) {
+		String sql = makeRouteSQLquery(hour, mon, routeNo, stopID);
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			//rs.next();
+		} catch (SQLException e) {
+			System.out.println("Query execution fail");
+			System.out.println(e.getMessage());
+		}
+		return rs;
+	}
 }

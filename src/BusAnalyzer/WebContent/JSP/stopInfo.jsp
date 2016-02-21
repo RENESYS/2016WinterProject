@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-<%@page import="db.DBContact" import="other.StopResManager" import="java.sql.*"%>
+<%@page import="db.DBContact" import="manage.StopResManager" import="java.sql.*"%>
 <%
-	DBContact db = new DBContact();
-StopResManager rsm = new StopResManager();
-	db.chooseDB("use sample");
+	StopResManager rsm = new StopResManager();
 	String hour = request.getParameter("hour");
 	String mon = request.getParameter("mon");
 	String type = request.getParameter("type");
-	rsm.setResultSet(db.selectStopInfo(hour, mon, type));
+	rsm.setResultSet(hour, mon, type);
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,9 +16,7 @@ StopResManager rsm = new StopResManager();
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>HELLO</h1>
-	
-	<h1><%=hour%> <%=mon%> <%=type%></h1>
+	<h3><%=mon%>월 <%=hour%>시 <%=type%> 데이터입니다.</h3>
 
 	<div id="map" style="width: 100%; height: 650px;"></div>
 
@@ -37,16 +33,14 @@ StopResManager rsm = new StopResManager();
 	</script>
 
 	<%
-		int cnt = 1;
-		while (cnt < 500) {
+		while (rsm.isLimit()) {
 			rsm.getNext();
 			String stop = rsm.getStop();
 			String ride = rsm.getRide();
 			String alight = rsm.getAlight();
 			String x = rsm.getGpsx();
 			String y = rsm.getGpsy();
-			String imgsrc  = rsm.getImageURL(cnt);
-			cnt++;
+			String imgsrc  = rsm.getImageURL();
 			%>
 			<script>
 			//set image
