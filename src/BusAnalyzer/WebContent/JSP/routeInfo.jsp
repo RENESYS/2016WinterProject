@@ -2,6 +2,7 @@
 	pageEncoding="EUC-KR"%>
 <%@page import="db.DBContact" import="manage.RouteResManager"
 	import="java.sql.*"%>
+<%@page errorPage = "error.jsp" %>
 <%
 	RouteResManager rsm = new RouteResManager();
 	String route = request.getParameter("routeNo");
@@ -34,11 +35,8 @@
 	<%
 	String formerX = null, formerY = null;
 	while(rsm.isStopLeft()){
-		//여기 채워 넣어야 됨 
 		rsm.setResultSet(route, mon, hour);
 		String stop = rsm.getStop();
-		String ride = rsm.getRide();
-		String alight = rsm.getAlight();
 		String x = rsm.getGpsx();
 		String y = rsm.getGpsy();
 		int pass = rsm.calcCongestion();
@@ -52,11 +50,8 @@
 			];
 			
 			var polyline = new daum.maps.Polyline({
-			    path: linePath,
-			    strokeWeight: 3,
-			    strokeColor: '<%=color%>',
-			    strokeOpacity: 0.8,
-			    strokeStyle: 'solid'
+			    path: linePath, strokeWeight: 3, strokeColor: '<%=color%>', 
+			    strokeOpacity: 0.8, strokeStyle: 'solid'
 			});
 			
 			polyline.setMap(map);  

@@ -90,7 +90,6 @@ public class DBContact {
 		try {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			//rs.next();
 		} catch (SQLException e) {
 			System.out.println("Query execution fail");
 			System.out.println(e.getMessage());

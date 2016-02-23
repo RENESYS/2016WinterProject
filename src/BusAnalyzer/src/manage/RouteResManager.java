@@ -61,9 +61,15 @@ public class RouteResManager {
 		if(stopID.length() == 5 && stopID.charAt(0) == '0'){
 			stopID = stopID.substring(1, 5);
 		}
+		System.out.println(stopID);
 		rs = db.selectRouteInfo(hour, mon, routeNo, stopID);
-		rs.next();		
-		index++;
+		//check SQL fail and select next stop
+		if(!rs.next()){
+			index++;
+			this.setResultSet(routeNo, mon, hour);
+		}
+		else
+			index++;
 	}
 	
 	//calculate bus congestion
