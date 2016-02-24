@@ -5,8 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
 
 <title>Bus Statistics</title>
 <!-- Bootstrap core CSS -->
@@ -16,7 +14,6 @@
 </head>
 
 <body>
-
 	<div class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -29,24 +26,19 @@
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Valuable Stops 500</a></li>
-					<li><a href="main2.jsp">Bus Congestion Analyze</a></li>
+					<li><a href="main.jsp">Valuable Stops 500</a></li>
+					<li class="active"><a href="#">Bus Congestion Analyze</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
 	</div>
 
 	<div class="container">
-		<h1>월별 최대 승하차 정류소 500</h1>
-		<form name="population" action="stopInfo.jsp" method="get">
+		<h1>노선별 혼잡도 안내</h1>
+		<form name="population" action="routeInfo.jsp" method="get">
+			노선번호 입력 : <input type="text" name="routeNo"> 
 			<select name="mon">
-				<option disabled>검색할 달을 선택하세요</option>
-				<option value="201501">1월</option>
-				<option value="201502">2월</option>
-				<option value="201503">3월</option>
-				<option value="201504">4월</option>
-				<option value="201505">5월</option>
-				<option value="201506">6월</option>
+				<option disabled>검색할 달을 선택하세요(7월 이후)</option>
 				<option value="201507">7월</option>
 				<option value="201508">8월</option>
 				<option value="201509">9월</option>
@@ -80,10 +72,6 @@
 				<option value="21">21시</option>
 				<option value="22">22시</option>
 				<option value="23">23시</option>
-			</select> <select name="type">
-				<option disabled>검색할 달을 선택하세요</option>
-				<option value="Ride">승차</option>
-				<option value="Alight">하차</option>
 			</select>
 			<button type="submit">검색</button>
 		</form>
