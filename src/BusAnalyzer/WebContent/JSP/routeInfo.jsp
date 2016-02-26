@@ -44,7 +44,11 @@
 		</div>
 	</div>
 
-	<div class="container">
+	<div id = "loading"  style="position:absolute; z-index:100000; visibility:visible; left:37%; top:33%;">
+		<img src="../img/wait.jpg"  style="width:70%; height:auto">
+	</div>
+
+	<div class="container" >
 	<h3><%=mon%>월 <%=hour%>시 <%=route%>번 버스 차내 혼잡도입니다.</h3>
 	<div id="map" style="width: 100%; height: 650px;"></div>
 
@@ -89,7 +93,10 @@
 	}
 	%>
 	</div>
-	
+	<script>
+		var loading = document.getElementById("loading");
+		loading.style.visibility = "hidden";
+	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="../dist/js/bootstrap.min.js"></script>
 </body>

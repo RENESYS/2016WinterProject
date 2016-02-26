@@ -31,8 +31,25 @@
 		</div>
 	</div>
 
-	<div class="container">
-		<h1>error!</h1>
+	<div class="container" align = "center">
+		<table>
+    	<tr>
+    		<td>
+    			<div class="panel panel-danger">
+			        <div class="panel-heading">
+			          <h2 class="panel-title"><b>에러가 발생했습니다!</b></h2>
+			        </div>
+			        <div class="panel-body">
+			          <div class="alert alert-warning">혹시 이런 실수를 하지 않으셨나요?</div></br>
+			          <p class="text-danger">※ 잘못된 노선 번호를 입력하였습니다</p>
+			          </br>
+			          </br>
+			          <p>다시 하려면 상단의 Home 탭이나 뒤로 가기를 누르세요.</p>
+			        </div>
+      			</div>
+    		</td>
+    	</tr>
+    </table>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

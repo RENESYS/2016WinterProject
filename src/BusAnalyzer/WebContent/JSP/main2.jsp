@@ -32,6 +32,10 @@
 			</div><!--/.nav-collapse -->
 		</div>
 	</div>
+	
+	<div id="loading" style="position:absolute; z-index:100000; visibility:hidden; left:37%; top:33%;">
+		<img src="../img/wait2.jpg" style="width:70%; height:auto">
+	</div>
 
 	<div class="container">
 		<h1>노선별 혼잡도 안내</h1>
@@ -73,11 +77,17 @@
 				<option value="22">22시</option>
 				<option value="23">23시</option>
 			</select>
-			<button type="submit">검색</button>
+			<button type="submit" onclick="wait()">검색</button>
 		</form>
 		<br><br><br>
 	</div>
 	
+	<script>
+	function wait(){
+		var loading = document.getElementById("loading");
+		loading.style.visibility = "visible";
+	}
+	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="../dist/js/bootstrap.min.js"></script>
 </body>
