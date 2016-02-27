@@ -15,6 +15,7 @@ public class RouteResManager {
 	StopList stopList;
 	int index;
 	int passenger;
+	int formerPass;
 	
 	public RouteResManager(){ 
 		rs = null; 
@@ -24,6 +25,7 @@ public class RouteResManager {
 		stopList = new StopList();
 		index = 0;
 		passenger = 0;
+		formerPass = 0;
 	}
 
 	public void setStopList(String routeNo){
@@ -61,7 +63,7 @@ public class RouteResManager {
 		if(stopID.length() == 5 && stopID.charAt(0) == '0'){
 			stopID = stopID.substring(1, 5);
 		}
-		System.out.println(stopID);
+		//System.out.println(stopID);
 		rs = db.selectRouteInfo(hour, mon, routeNo, stopID);
 		//check SQL fail and select next stop
 		if(!rs.next()){
@@ -73,21 +75,21 @@ public class RouteResManager {
 	}
 	
 	//calculate bus congestion
-	public int calcCongestion() throws SQLException{
+	public void calcCongestion() throws SQLException{
+		formerPass = passenger;
 		passenger += Integer.parseInt(rs.getString(2)) - Integer.parseInt(rs.getString(3));
 		if (passenger < 0)
 			passenger = 0;
 		System.out.println(rs.getString(1) + " : " + passenger);
-		return passenger;
 	}
 	
 	//set the line color to show congestion
 	public String setColor(){
 		String color = null;
-		if(passenger < 2000) 	color = "#0033ff";
-		else if (passenger >= 2000 && passenger < 4000) 	color = "#006600";
-		else if (passenger >= 4000 && passenger < 6000) 	color = "#ffcc00";
-		else if (passenger >= 6000 && passenger < 7000) 	color = "#ff6600";
+		if(formerPass < 2000) 	color = "#0033ff";
+		else if (formerPass >= 2000 && formerPass < 4000) 	color = "#006600";
+		else if (formerPass >= 4000 && formerPass < 6000) 	color = "#ffcc00";
+		else if (formerPass >= 6000 && formerPass < 7000) 	color = "#ff6600";
 		else	color = "#ff0000";
 		return color;
 	}

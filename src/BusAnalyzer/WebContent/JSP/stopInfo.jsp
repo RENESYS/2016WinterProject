@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@page import="db.DBContact" import="manage.StopResManager" import="java.sql.*"%>
+<%@page errorPage = "error.jsp" %>
 <%
 	StopResManager rsm = new StopResManager();
-	String hour = request.getParameter("hour");
-	String mon = request.getParameter("mon");
-	String type = request.getParameter("type");
+	String hour = rsm.checkInput(request.getParameter("hour"));
+	String mon = rsm.checkInput(request.getParameter("mon"));
+	String type = rsm.checkInput(request.getParameter("type"));
 	rsm.setResultSet(hour, mon, type);
 	
 %>

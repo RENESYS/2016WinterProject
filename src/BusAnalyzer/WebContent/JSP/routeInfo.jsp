@@ -5,10 +5,9 @@
 <%@page errorPage = "error.jsp" %>
 <%
 	RouteResManager rsm = new RouteResManager();
-	String route = request.getParameter("routeNo");
-	String mon = request.getParameter("mon");
-	String hour = request.getParameter("hour");
-	route = rsm.checkInput(route);
+	String route = rsm.checkInput(request.getParameter("routeNo"));
+	String mon = rsm.checkInput(request.getParameter("mon"));
+	String hour = rsm.checkInput(request.getParameter("hour"));
 	rsm.setStopList(route);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -69,7 +68,7 @@
 		String stop = rsm.getStop();
 		String x = rsm.getGpsx();
 		String y = rsm.getGpsy();
-		int pass = rsm.calcCongestion();
+		rsm.calcCongestion();
 		String color = rsm.setColor();
 		if(formerX != null && formerY != null){
 		%>

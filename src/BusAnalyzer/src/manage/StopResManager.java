@@ -59,4 +59,12 @@ public class StopResManager {
 		return url;
 	}
 	
+	//check input value for prevent SQL injection
+		public String checkInput(String str){
+			if(str.contains(";") || str.contains("'")){
+				str = "-1";
+			}
+			return str;
+		}
+	
 }
