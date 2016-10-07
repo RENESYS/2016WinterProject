@@ -26,6 +26,8 @@ Analyze bus congestion per hour of each line
 
 ● Use Daum map API to express result in visual
 
+Details(Korean) : http://renesys.tistory.com/11
+
 
 
 
