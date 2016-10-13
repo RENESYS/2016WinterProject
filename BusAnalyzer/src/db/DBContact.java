@@ -56,17 +56,20 @@ public class DBContact {
 		String ride = "Ride" + hour;
 		String alight = "Alight" + hour;
 		String sel = type + hour;
-		String sql = "select StopName, sum(" + ride + "), sum(" + alight + "), gpsX, gpsY from bus where UseMon=" 
-				+ mon + " group by StopName order by sum( " + sel + ") desc";
+		String sql = "select StopName, sum(" + ride + "), sum(" + alight + "), GpsX, GpsY from busdata "
+		+ "inner join busstop on busdata.StopID=busstop.StopID where UseMon=" + mon + " group by "
+		+ "StopName order by sum(" + sel + ") desc limit 500;";
 		return sql;
 	}
 	
 	//make SQL query from user's input
-		public String makeRouteSQLquery(String hour, String mon, String routeNo, String stopID){
+		public String makeRouteSQLquery(String hour, String mon, String routeNo){
 			String ride = "Ride" + hour;
 			String alight = "Alight" + hour;
-			String sql = "select StopName, " + ride + ", " + alight + ", GpsX, GpsY from bus where RouteNo=" + routeNo
-					+ " and StopID=" + stopID + " and UseMon=" + mon;
+			String sql = "select S.StopName, D." + ride + ", D." + alight + ", S.GpsX, S.GpsY, R.Dir " 
+					+ "from busstop S, busroute R, busdata D where R.RouteNo=D.RouteNo and R.StopID=D.StopID "
+					+ "and S.StopID=D.StopID and R.RouteNo=" + routeNo + " and D.UseMon=" + mon + " order by R.Seq;";
+			System.out.println(sql);
 			return sql;
 		}
 
@@ -85,8 +88,8 @@ public class DBContact {
 	}
 
 	
-	public ResultSet selectRouteInfo(String hour, String mon, String routeNo, String stopID) {
-		String sql = makeRouteSQLquery(hour, mon, routeNo, stopID);
+	public ResultSet selectRouteInfo(String hour, String mon, String routeNo) {
+		String sql = makeRouteSQLquery(hour, mon, routeNo);
 		try {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();

@@ -1,18 +1,30 @@
-package other;
+package manage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import db.DBContact;
+
+
 public class StopResManager {
 	ResultSet rs;
+	DBContact db;
+	int cnt = 0;
 	
-	public StopResManager(){ rs = null; }
-	
-	public void setResultSet(ResultSet r){
-		rs = r;
+	public StopResManager(){ 
+		rs = null; 
+		db = new DBContact();
+		db.chooseDB("use busapp");
 	}
-	public void getNext() throws SQLException{
-		rs.next();
+	
+	public void setResultSet(String hour, String mon, String type){
+		rs = db.selectStopInfo(hour, mon, type);	
+	}
+	
+	//ResultSet Control functions
+	public boolean getNext() throws SQLException{
+		cnt++;
+		return rs.next();
 	}
 	public String getStop() throws SQLException{
 		return rs.getString(1);
@@ -30,8 +42,9 @@ public class StopResManager {
 		return rs.getString(5);
 	}
 	
+	
 	//select proper image
-	public String getImageURL(int cnt){
+	public String getImageURL(){
 		String url = null;
 		if(cnt <= 100){
 			url="http://localhost:8080/BusAnalyzer2/img/red.png";
@@ -42,5 +55,13 @@ public class StopResManager {
 		
 		return url;
 	}
+	
+	//check input value for prevent SQL injection
+		public String checkInput(String str){
+			if(str.contains(";") || str.contains("'")){
+				str = "-1";
+			}
+			return str;
+		}
 	
 }

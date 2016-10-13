@@ -8,7 +8,8 @@
 	String route = rsm.checkInput(request.getParameter("routeNo"));
 	String mon = rsm.checkInput(request.getParameter("mon"));
 	String hour = rsm.checkInput(request.getParameter("hour"));
-	rsm.setStopList(route);
+	String bound = rsm.checkInput(request.getParameter("bound"));
+	rsm.setResultSet(route, mon, hour);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -37,7 +38,7 @@
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="main.jsp">Valuable Stops 500</a></li>
-					<li class="active"><a href="#">Bus Congestion Analyze</a></li>
+					<li class="active"><a href="main2.jsp">Bus Congestion Analyze</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -48,7 +49,7 @@
 	</div>
 
 	<div class="container" >
-	<h3><%=mon%>월 <%=hour%>시 <%=route%>번 버스 차내 혼잡도입니다.</h3>
+	<h3><%=mon%>월 <%=hour%>시 <%=route%>번 버스 <%=bound%> 차내 혼잡도입니다. </h3>
 	<div id="map" style="width: 100%; height: 650px;"></div>
 
 	<script type="text/javascript"
@@ -63,32 +64,33 @@
 	</script>
 	<%
 	String formerX = null, formerY = null;
-	while(rsm.isStopLeft()){
-		rsm.setResultSet(route, mon, hour);
-		String stop = rsm.getStop();
-		String x = rsm.getGpsx();
-		String y = rsm.getGpsy();
-		rsm.calcCongestion();
-		String color = rsm.setColor();
-		if(formerX != null && formerY != null){
-		%>
-		<script>
-			var linePath = [
-			    new daum.maps.LatLng(<%=formerY%>, <%=formerX%>),
-			    new daum.maps.LatLng(<%=y%>, <%=x%>)
-			];
-			
-			var polyline = new daum.maps.Polyline({
-			    path: linePath, strokeWeight: 3, strokeColor: '<%=color%>', 
-			    strokeOpacity: 0.8, strokeStyle: 'solid'
-			});
-			
-			polyline.setMap(map);  
-		</script>
-		<%
+	while(rsm.getNext()){
+		rsm.setAccess(bound);
+		if(rsm.getAccess()){
+			String stop = rsm.getStop();
+			String x = rsm.getGpsx();
+			String y = rsm.getGpsy();
+			rsm.calcCongestion();
+			String color = rsm.setColor();
+			if(formerX != null && formerY != null){
+			%>
+			<script>
+				var linePath = [
+				    new daum.maps.LatLng(<%=formerY%>, <%=formerX%>),
+				    new daum.maps.LatLng(<%=y%>, <%=x%>)
+				];
+				
+				var polyline = new daum.maps.Polyline({
+				    path: linePath, strokeWeight: 6, strokeColor: '<%=color%>', 
+				    strokeOpacity: 0.8, strokeStyle: 'solid'
+				});
+				polyline.setMap(map);  
+			</script>
+			<%
+			}
+			formerX = x;
+			formerY = y;
 		}
-		formerX = x;
-		formerY = y;
 	}
 	%>
 	</div>

@@ -11,34 +11,31 @@ import db.DBContact;
 public class RouteResManager {
 	ResultSet rs;
 	DBContact db;
-	SiteConnect site;
-	StopList stopList;
-	int index;
 	int passenger;
 	int formerPass;
+	boolean access;
+	boolean first;
+	String dest;
 	
 	public RouteResManager(){ 
 		rs = null; 
 		db = new DBContact();
-		db.chooseDB("use sample");
-		site = new SiteConnect();
-		stopList = new StopList();
-		index = 0;
+		db.chooseDB("use busapp");
 		passenger = 0;
 		formerPass = 0;
-	}
-
-	public void setStopList(String routeNo){
-		String ID = site.getBusID(routeNo);
-		site.setStopList(ID, stopList);		
+		access = true;
+		first = true;
+		dest = "";
 	}
 	
-	public boolean isStopLeft(){
-		return index < stopList.getSize();
-	}
-	
-	public void getNext() throws SQLException{
-		rs.next();
+	public boolean getNext() throws SQLException{
+		boolean b = rs.next();
+		if(first){
+			dest = getDir();
+			System.out.println(dest);
+			first = false;
+		}
+		return b;
 	}
 	public String getStop() throws SQLException{
 		return rs.getString(1);
@@ -55,23 +52,28 @@ public class RouteResManager {
 	public String getGpsy() throws SQLException{
 		return rs.getString(5);
 	}
+	public String getDir() throws SQLException{
+		return rs.getString(6);
+	}
+	public boolean getAccess(){
+		return access;
+	}
 	
 	//search the value from DB
 	public void setResultSet(String routeNo, String mon, String hour) throws SQLException{
-		JSONObject obj = stopList.getObject(index);
-		String stopID = (String)obj.get("stationNo");
-		if(stopID.length() == 5 && stopID.charAt(0) == '0'){
-			stopID = stopID.substring(1, 5);
+		rs = db.selectRouteInfo(hour, mon, routeNo);
+	}
+	
+	public void setAccess(String bound) throws SQLException{
+		if(bound.equals("down") && !dest.equals(getDir())){
+			access = false;
 		}
-		//System.out.println(stopID);
-		rs = db.selectRouteInfo(hour, mon, routeNo, stopID);
-		//check SQL fail and select next stop
-		if(!rs.next()){
-			index++;
-			this.setResultSet(routeNo, mon, hour);
+		else if(bound.equals("up") && !dest.equals(getDir())){
+			access = true;
 		}
-		else
-			index++;
+		else if(bound.equals("up")){
+			access = false;
+		}
 	}
 	
 	//calculate bus congestion

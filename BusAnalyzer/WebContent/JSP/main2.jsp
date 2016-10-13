@@ -77,17 +77,15 @@
 				<option value="22">22시</option>
 				<option value="23">23시</option>
 			</select>
+			<select name="bound">
+				<option disabled>검색할 시간대를 선택하세요</option>
+				<option value="down">하행</option>
+				<option value="up">상행</option>
+			</select>
 			<button type="submit" onclick="wait()">검색</button>
 		</form>
 		<br><br><br>
 	</div>
-	
-	<script>
-	function wait(){
-		var loading = document.getElementById("loading");
-		loading.style.visibility = "visible";
-	}
-	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="../dist/js/bootstrap.min.js"></script>
 </body>

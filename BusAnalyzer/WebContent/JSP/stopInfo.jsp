@@ -36,7 +36,7 @@
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Valuable Stops 500</a></li>
+					<li class="active"><a href="main.jsp">Valuable Stops 500</a></li>
 					<li><a href="main2.jsp">Bus Congestion Analyze</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
@@ -62,8 +62,7 @@
 		</script>
 	
 		<%
-			while (rsm.isLimit()) {
-				rsm.getNext();
+			while (rsm.getNext()) {
 				String stop = rsm.getStop();
 				String ride = rsm.getRide();
 				String alight = rsm.getAlight();
