@@ -36,7 +36,7 @@ Details(Korean) : http://renesys.tistory.com/11
 
 - manual : http://renesys.tistory.com/23
 
-* The site may not connect whether server has closed
+The site may not connect whether server has closed
 
 
 
