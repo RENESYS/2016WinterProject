@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class DBContact {
 
 	String driver = "org.mariadb.jdbc.Driver";
-	String url = "jdbc:mariadb://localhost";
+	String url = "jdbc:mariadb://192.168.0.25";
 	String uId = "root";
 	String uPwd = "1q2w3e";
 
