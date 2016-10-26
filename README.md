@@ -32,11 +32,7 @@ Details(Korean) : http://renesys.tistory.com/11
 
 ## How to use
 
-- url : http://192.168.0.25:8080/BusAnalyzer
-
 - manual : http://renesys.tistory.com/23
-
-The site may not connect whether server has closed
 
 
 
