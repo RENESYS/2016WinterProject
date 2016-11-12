@@ -29,7 +29,7 @@ Analyze bus congestion per hour of each line
 
 Details(Korean) : http://renesys.tistory.com/11
 
-URL : http://sample-env.n34pp9sjch.ap-northeast-1.elasticbeanstalk.com/
+URL : http://busAnalyzer.n34pp9sjch.ap-northeast-1.elasticbeanstalk.com
 
 
 ## How to use
