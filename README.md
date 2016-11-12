@@ -6,9 +6,8 @@ Analyze bus congestion per hour of each line
 
 ## Develop Environment & Tools
 
-- Windows
-- Eclipse
-- Maria DB
+- AWS(Elastic Beanstalk)
+- Maria DB as RDS
 - Bootstrap
 - Daum map API
 
