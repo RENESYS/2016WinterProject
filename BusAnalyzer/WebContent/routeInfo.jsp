@@ -94,6 +94,12 @@
 	}
 	%>
 	</div>
+	<br><br>
+	<div align="center">RED : Extremely Crowded</div><br>
+	<div align="center">ORANGE : High Crowded</div><br>
+	<div align="center">YELLOW : Normally Crowded</div><br>
+	<div align="center">GREEN : Little Comfortable, Chance to sit</div><br>
+	<div align="center">BLUE : High Comfortable, Guarantee to sit</div><br>
 	<script>
 		var loading = document.getElementById("loading");
 		loading.style.visibility = "hidden";

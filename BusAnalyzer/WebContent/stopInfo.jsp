@@ -93,6 +93,8 @@
 			}
 		%>
 	</div>
+	<br><br>
+	<div align="center">RED : top 100 / YELLOW : top 300 / GREEN : top 500</div>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="dist/js/bootstrap.min.js"></script>

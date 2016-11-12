@@ -10,6 +10,7 @@ public class StopResManager {
 	ResultSet rs;
 	DBContact db;
 	int cnt = 0;
+	final String IP = "busanalyzer.n34pp9sjch.ap-northeast-1.elasticbeanstalk.com";
 	
 	public StopResManager(){ 
 		rs = null; 
@@ -47,11 +48,11 @@ public class StopResManager {
 	public String getImageURL(){
 		String url = null;
 		if(cnt <= 100){
-			url="http://localhost:8080/BusAnalyzer2/img/red.png";
+			url="https://s3-ap-northeast-1.amazonaws.com/elasticbeanstalk-ap-northeast-1-028379136687/red.png";
 		}else if(cnt > 100 && cnt <= 250){
-			url="http://localhost:8080/BusAnalyzer2/img/yellow.png";
+			url="https://s3-ap-northeast-1.amazonaws.com/elasticbeanstalk-ap-northeast-1-028379136687/yellow.png";
 		}else
-			url="http://localhost:8080/BusAnalyzer2/img/green.png";
+			url="https://s3-ap-northeast-1.amazonaws.com/elasticbeanstalk-ap-northeast-1-028379136687/green.png";
 		
 		return url;
 	}

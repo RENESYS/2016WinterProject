@@ -9,9 +9,9 @@ import java.sql.SQLException;
 public class DBContact {
 
 	String driver = "org.mariadb.jdbc.Driver";
-	String url = "jdbc:mariadb://192.168.0.25";
-	String uId = "root";
-	String uPwd = "1q2w3e";
+	String url = "jdbc:mariadb://busapp.cq34o2x5bvbm.ap-northeast-1.rds.amazonaws.com";
+	String uId = "renesys";
+	String uPwd = "---";
 
 	Connection con;
 	PreparedStatement pstmt;
